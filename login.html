@@ -30,15 +30,20 @@
     </script>
     $(endif)
 
-    <!-- Kotak Utama -->
+    <!-- Kotak Utama Start -->
     <div id="main" class="main">
       <div class="container">
 
         <!-- Judul -->
         <div class="judul">
-          <div class="brand">SAHID-<span>ALI</span>.NET</div>
+          <div class="brand">MUHAJIRIN<span>.NET</span></div>
           <div class="bawah-judul">
             <img src="/img/WA.png"><a href="https://wa.me/6287853260020">0878 5326 0020</a>
+          </div>
+          <div class="jam">
+            <span class="date" style="font-size: 9px;"></span>&nbsp&nbsp
+            <span class="hms" style="font-size: 14px; font-weight: bold;"></span>&nbsp
+            <span class="ampm" style="font-size: 9px;"></span>
           </div>
         </div>
 
@@ -114,7 +119,6 @@
           </div>
 
           <!-- Gambar -->
-          <img src="img/logo.png">
           <img src="/img/bw.png">
 
           <!-- AUDIO -->
@@ -126,28 +130,38 @@
         <table>
           <caption>HARGA VOUCHER</caption>
           <tr>
-            <th>HARGA</th>
-            <th>WAKTU</th>
-            <th>AKTIF</th>
+            <th>Paket</th>
+            <th>Aktif</th>
+            <th>Harga</th>
           </tr>
           <tr>
-            <td>Rp.3000</td>
-            <td>24 JAM </td>
-            <td>1 HARI </td>
+            <td>6 Jam</td>
+            <td>12 Jam</td>
+            <td>Rp 2.000</td>
+          </tr>
+          <tr>
+            <td>15 Jam</td>
+            <td>1 Hari</td>
+            <td>Rp 3.000</td>
+          </tr>
+          <tr>
+            <td>24 Jam</td>
+            <td>2 Hari</td>
+            <td>Rp 5.000</td>
+          </tr>
+          <tr>
+            <td>Mingguan</td>
+            <td>7 Hari</td>
+            <td>Rp 25.000</td>
+          </tr>
+          <tr>
+            <td>Bulanan</td>
+            <td>30 Hari</td>
+            <td>Rp 50.000</td>
           </tr>
         </table>
-
-        <!-- Warning -->
-        <div class="warning">
-          <h1>WARNING !!!</h1>
-          <ol>
-            <li>Mari kita tingkatkan rasa saling peduli terhadap sesama</li>
-            <li>Dengan memanfaatkan jaringan internet yg kami sediakan, mari brsosialisasi</li>
-            <li>Gunakan dengan bijak hubungkan ke SAHID ALI NET buka chrom ktik sahidali.net </li>
-            <li>JANGAN SAKITI HEWAN JANGAN BUNUH ORANG DAMAI UDAH DEKAT</li>
-          </ol>
-        </div>
       </div>
+      <!-- Kotak end -->
 
       <div class="box" style="color:#fff;">
         <i>Copyright &copy; 2023 FARUQADV<i><br <i>Powered by </i><a id="mikhmon"
@@ -199,6 +213,71 @@
           "img/bg.jpg",
         ], {
         });
+      </script>
+
+      <!-- Mesin Jam -->
+      <script>
+        function updateTime() {
+          var dateInfo = new Date();
+
+          /* time */
+          var hr,
+            _min = (dateInfo.getMinutes() < 10) ? "0" + dateInfo.getMinutes() : dateInfo.getMinutes(),
+            sec = (dateInfo.getSeconds() < 10) ? "0" + dateInfo.getSeconds() : dateInfo.getSeconds(),
+            ampm = (dateInfo.getHours() >= 12) ? "PM" : "AM";
+
+          // replace 0 with 12 at midnight, subtract 12 from hour if 13–23
+          if (dateInfo.getHours() == 0) {
+            hr = 12;
+          } else if (dateInfo.getHours() > 12) {
+            hr = dateInfo.getHours() - 12;
+          } else {
+            hr = dateInfo.getHours();
+          }
+
+          var currentTime = hr + ":" + _min + ":" + sec;
+
+          // print time
+          document.getElementsByClassName("hms")[0].innerHTML = currentTime;
+          document.getElementsByClassName("ampm")[0].innerHTML = ampm;
+
+          /* date */
+          var dow = [
+            "MINGGU",
+            "SENIN",
+            "SELASA",
+            "RABU",
+            "KAMIS",
+            "JUMAT",
+            "SABTU"
+          ],
+            month = [
+              "JANUARI",
+              "FEBRUARI",
+              "MARET",
+              "APRIL",
+              "MEI",
+              "JUNI",
+              "JULI",
+              "AGUSTUS",
+              "SEPTEMBER",
+              "OKTOBER",
+              "NOVEMBER",
+              "DESEMBER"
+            ],
+            day = dateInfo.getDate();
+
+          // store date
+          var currentDate = dow[dateInfo.getDay()] + ", " + day + " " + month[dateInfo.getMonth()];
+
+          document.getElementsByClassName("date")[0].innerHTML = currentDate;
+        };
+
+        // print time and date once, then update them every second
+        updateTime();
+        setInterval(function () {
+          updateTime()
+        }, 1000);
       </script>
 
 </body>
